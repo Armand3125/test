@@ -1,21 +1,5 @@
 import streamlit as st
 
-# Titre de l'application
-st.title("Bouton Rouge avec Streamlit")
-
-# Style CSS pour personnaliser le bouton en rouge
-st.markdown("""
-    <style>
-    .stButton > button {
-        color: white;
-        background-color: red;
-        padding: 10px 20px;
-        font-size: 18px;
-        border-radius: 5px;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
-# Afficher le bouton
+st.title("Test minimal")
 if st.button("Cliquez-moi !"):
-    st.write("Vous avez cliqué sur le bouton rouge !")
+    st.write("Bouton fonctionnel.")
