@@ -1,4 +1,3 @@
-pip install scikit-learn
 import streamlit as st
 from sklearn.cluster import KMeans
 from scipy.spatial import distance
@@ -16,7 +15,7 @@ pal = {
     "Gris_Argent": (166, 169, 170), "Violet_Basic": (94, 67, 183),
 }
 
-# Fonction pour calculer les couleurs les plus proches
+# Calculer les couleurs les plus proches
 def proches(c, pal):
     dists = [(n, distance.euclidean(c, col)) for n, col in pal.items()]
     return sorted(dists, key=lambda x: x[1])
@@ -24,13 +23,13 @@ def proches(c, pal):
 def proches_lim(c, pal, n):
     return [n for n, _ in proches(c, pal)[:n]]
 
-# Fonction pour créer une image mappée avec les couleurs de la palette
+# Créer une nouvelle image en mappant les clusters aux couleurs de la palette
 def nouvelle_img(img_arr, labels, cl_proches, selected_colors, pal):
     color_map = {i: pal[cl_proches[i][selected_colors[i]]] for i in range(len(cl_proches))}
     img_mapped = np.array([color_map[label] for label in labels])
     return img_mapped.reshape(img_arr.shape)
 
-# Fonction pour traiter l'image
+# Traiter l'image pour clustering et application de la palette
 def traiter_img(img, Nc, Nd, dim_max):
     try:
         img = Image.open(img).convert('RGB')
@@ -56,36 +55,22 @@ def traiter_img(img, Nc, Nd, dim_max):
         new_img_arr = nouvelle_img(img_arr, labels, cl_proches, st.session_state.selected_colors, pal)
         st.session_state.modified_image = new_img_arr.astype('uint8')
 
-        # Afficher chaque cluster avec des boutons stylisés
         for idx, (cl, count) in enumerate(sorted_cls):
             percentage = (count / total_px) * 100
             st.write(f"Cluster {idx + 1} - {percentage:.2f}%")
             col_options = cl_proches[cl]
             cols = st.columns(len(col_options))
 
-            # Création de boutons avec CSS pour chaque couleur
             for j, color in enumerate(col_options):
                 rgb = pal[color]
                 rgb_str = f"rgb({rgb[0]}, {rgb[1]}, {rgb[2]})"
+
+                # Afficher un rectangle coloré comme fond de bouton
+                cols[j].markdown(f"<div style='background-color: {rgb_str}; width: 40px; height: 20px; border-radius: 5px; display: inline-block;'></div>", unsafe_allow_html=True)
+
+                # Utiliser un bouton Streamlit
                 button_key = f'button_{idx}_{j}_{color}'
-
-                # CSS pour styliser chaque bouton
-                st.markdown(f"""
-                    <style>
-                    .stButton > button[data-testid="{button_key}"] {{
-                        background-color: {rgb_str};
-                        color: white;
-                        padding: 10px;
-                        font-size: 16px;
-                        border-radius: 5px;
-                        margin: 5px;
-                        border: none;
-                    }}
-                    </style>
-                """, unsafe_allow_html=True)
-
-                # Bouton Streamlit avec le style CSS appliqué
-                if cols[j].button(label=color, key=button_key, help=color):
+                if cols[j].button(label="", key=button_key, help=color):
                     st.session_state.selected_colors[cl] = j
                     new_img_arr = nouvelle_img(img_arr, labels, cl_proches, st.session_state.selected_colors, pal)
                     st.session_state.modified_image = new_img_arr.astype('uint8')
