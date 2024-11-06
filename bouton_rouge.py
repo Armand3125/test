@@ -25,11 +25,12 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Affichage des boutons avec couleurs
-if st.button("Rouge", key="red_button", help="Cliquez pour choisir la couleur rouge"):
+if st.button("Rouge", key="red_button"):
     st.write("Vous avez choisi la couleur Rouge.")
 
-if st.button("Jaune", key="yellow_button", help="Cliquez pour choisir la couleur jaune"):
+if st.button("Jaune", key="yellow_button"):
     st.write("Vous avez choisi la couleur Jaune.")
 
-if st.button("Bleu", key="blue_button", help="Cliquez pour choisir la couleur bleue"):
+if st.button("Bleu", key="blue_button"):
     st.write("Vous avez choisi la couleur Bleue.")
+
