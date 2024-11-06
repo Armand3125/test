@@ -9,6 +9,7 @@ st.markdown("""
         font-size: 18px;
         border-radius: 5px;
         width: 100%;
+        color: white;  /* Met le texte en blanc par défaut */
     }
 
     /* Style pour le premier bouton (Rouge) */
@@ -20,7 +21,7 @@ st.markdown("""
     /* Style pour le deuxième bouton (Jaune) */
     .stButton:nth-child(2) > button {
         background-color: yellow;
-        color: black;
+        color: black;  /* Change la couleur du texte à noir pour un meilleur contraste */
     }
 
     /* Style pour le troisième bouton (Bleu) */
