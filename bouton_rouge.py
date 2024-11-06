@@ -14,24 +14,19 @@ pal = {
 # Titre de l'application
 st.title("Sélection de Couleurs")
 
-# Créer une liste de labels personnalisés pour le radio, avec des rectangles colorés
-color_options = [
-    f"<div style='background-color: rgb{rgb}; width: 30px; height: 30px; display: inline-block; margin-right: 10px;'></div>{color_name}"
-    for color_name, rgb in pal.items()
-]
+# Créer les cases à cocher avec des rectangles colorés comme labels
+selected_colors = []
+for color_name, rgb in pal.items():
+    # Créer un bloc coloré en HTML
+    color_block = f"<div style='background-color: rgb{rgb}; width: 30px; height: 30px; display: inline-block; margin-right: 10px;'></div>"
+    # Afficher la case à cocher avec le bloc coloré comme label
+    if st.checkbox(color_block, key=color_name):
+        selected_colors.append((color_name, rgb))
 
-# Afficher le sélecteur radio avec des rectangles colorés
-selected_color = st.radio(
-    "Choisissez une couleur",
-    options=color_options,
-    format_func=lambda x: ""  # Cette ligne permet de ne pas afficher le texte de l'option, juste le rectangle
-)
-
-# Extraire le nom de la couleur à partir de la sélection
-selected_color_name = next(color_name for color_name, rgb in pal.items() if f"<div style='background-color: rgb{rgb}" in selected_color)
-
-# Afficher la couleur sélectionnée et son apparence
-if selected_color:
-    rgb = pal[selected_color_name]
-    st.write(f"Vous avez sélectionné la couleur : {selected_color_name}")
-    st.markdown(f"<div style='background-color: rgb{rgb}; padding: 10px; margin-bottom: 5px;'> </div>", unsafe_allow_html=True)
+# Afficher les couleurs sélectionnées
+if selected_colors:
+    st.write("Vous avez sélectionné les couleurs suivantes :")
+    for color_name, rgb in selected_colors:
+        st.markdown(f"<div style='background-color: rgb{rgb}; padding: 10px; margin-bottom: 5px;'> {color_name} </div>", unsafe_allow_html=True)
+else:
+    st.write("Aucune couleur sélectionnée.")
