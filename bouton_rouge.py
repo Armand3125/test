@@ -9,33 +9,27 @@ st.markdown("""
         border-radius: 5px;
         width: 100%;
     }
-
-    /* Style pour le bouton rouge */
-    .stButton#red_button > button {
+    .stButton:nth-child(1) > button {
         background-color: red;
         color: white;
     }
-
-    /* Style pour le bouton jaune */
-    .stButton#yellow_button > button {
+    .stButton:nth-child(2) > button {
         background-color: yellow;
         color: black;
     }
-
-    /* Style pour le bouton bleu */
-    .stButton#blue_button > button {
+    .stButton:nth-child(3) > button {
         background-color: blue;
         color: white;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# Créer les boutons avec des clés uniques pour appliquer un style spécifique
-if st.button("Rouge", key="red_button"):
+# Créer les boutons avec Streamlit
+if st.button("Rouge"):
     st.write("Vous avez choisi la couleur Rouge.")
 
-if st.button("Jaune", key="yellow_button"):
+if st.button("Jaune"):
     st.write("Vous avez choisi la couleur Jaune.")
 
-if st.button("Bleu", key="blue_button"):
-    st.write("Vous avez choisi la couleur Bleue.")
+if st.button("Bleu"):
+    st.write("Vous avez choisi la couleur Bleue.") 
