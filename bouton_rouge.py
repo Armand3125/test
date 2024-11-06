@@ -59,34 +59,29 @@ def traiter_img(img, Nc, Nd, dim_max):
             percentage = (count / total_px) * 100
             st.write(f"Cluster {idx + 1} - {percentage:.2f}%")
             col_options = cl_proches[cl]
-            cols = st.columns(len(col_options))
 
             for j, color in enumerate(col_options):
                 rgb = pal[color]
                 rgb_str = f"rgb({rgb[0]}, {rgb[1]}, {rgb[2]})"
 
-                # Afficher un rectangle coloré comme fond de bouton
-                cols[j].markdown(f"<div style='background-color: {rgb_str}; width: 40px; height: 20px; border-radius: 5px; display: inline-block;'></div>", unsafe_allow_html=True)
-
-                # Utiliser un bouton Streamlit avec style CSS personnalisé
-                button_key = f'button_{idx}_{j}_{color}'
-
-                # Personnalisation CSS
+                # Personnalisation du style du bouton
                 button_style = f"""
                 <style>
                 .stButton > button {{
                     color: white;
                     background-color: {rgb_str};
                     padding: 10px 20px;
-                    font-size: 16px;
+                    font-size: 18px;
                     border-radius: 5px;
-                    width: 100%;
                 }}
                 </style>
                 """
                 st.markdown(button_style, unsafe_allow_html=True)
 
-                if cols[j].button(label="", key=button_key, help=color):
+                # Créer le bouton pour chaque couleur
+                button_key = f'button_{idx}_{j}_{color}'
+
+                if st.button(label=color, key=button_key):
                     st.session_state.selected_colors[cl] = j
                     new_img_arr = nouvelle_img(img_arr, labels, cl_proches, st.session_state.selected_colors, pal)
                     st.session_state.modified_image = new_img_arr.astype('uint8')
