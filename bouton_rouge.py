@@ -65,10 +65,10 @@ def traiter_img(img, Nc, Nd, dim_max):
                 rgb = pal[color]
                 rgb_str = f"rgb({rgb[0]}, {rgb[1]}, {rgb[2]})"
 
-                # Appliquer le style CSS au bouton avec la couleur
+                # Appliquer le style CSS pour chaque bouton avec la couleur correcte
                 button_style = f"""
                 <style>
-                .stButton > button {{
+                .stButton#{f'button_{idx}_{j}_{color}'} > button {{
                     color: white;
                     background-color: {rgb_str};
                     padding: 10px 20px;
@@ -104,4 +104,4 @@ if uploaded_file is not None:
     traiter_img(uploaded_file, Nc, Nd, dim_max)
 
 if 'modified_image' in st.session_state:
-    st.image(st.session_state.modified_image, caption="Image Modifiée", width=int(1.5 * dim_max)) 
+    st.image(st.session_state.modified_image, caption="Image Modifiée", width=int(1.5 * dim_max))
