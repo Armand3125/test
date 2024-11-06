@@ -20,7 +20,6 @@ def get_random_color():
     return f"rgb{color_value}", color_name
 
 if st.button(""):
-    st.session_state.button_clicked = not st.session_state.button_clicked
     st.session_state.button_color, st.session_state.selected_color_name = get_random_color()
 
 st.markdown(f"""
