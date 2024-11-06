@@ -1,42 +1,29 @@
 import streamlit as st
 
-# Appliquer des styles CSS pour colorer les boutons
-st.markdown("""
-    <style>
-    /* Style général pour tous les boutons */
-    .stButton > button {
-        padding: 10px 20px;
-        font-size: 18px;
-        border-radius: 5px;
-        width: 100%;
-    }
+# Définition de la palette de couleurs
+pal = {
+    "Noir_Charbon": (0, 0, 0), "Blanc_Jade": (255, 255, 255),
+    "Jaune_Or": (228, 189, 104), "Bleu_Cyan": (0, 134, 214),
+    "Violet_Lila": (174, 150, 212), "Vert_Gui": (63, 142, 67),
+    "Rouge_Ecarlate": (222, 67, 67), "Bleu_Marine": (0, 120, 191),
+    "Orange_Mandarine": (249, 153, 99), "Vert_Galaxie": (59, 102, 94),
+    "Bleu_Glacier": (163, 216, 225), "Violet_Magenta": (236, 0, 140),
+    "Gris_Argent": (166, 169, 170), "Violet_Basic": (94, 67, 183),
+}
 
-    /* Style spécifique pour le premier bouton (Rouge) */
-    .stButton#red_button > button {
-        background-color: red;
-        color: white;
-    }
+# Titre de l'application
+st.title("Sélection de Couleurs")
 
-    /* Style spécifique pour le deuxième bouton (Jaune) */
-    .stButton#yellow_button > button {
-        background-color: yellow;
-        color: black;
-    }
+# Affichage des cases à cocher pour chaque couleur de la palette
+selected_colors = []
+for color_name, rgb in pal.items():
+    if st.checkbox(color_name, key=color_name):
+        selected_colors.append((color_name, rgb))
 
-    /* Style spécifique pour le troisième bouton (Bleu) */
-    .stButton#blue_button > button {
-        background-color: blue;
-        color: white;
-    }
-    </style>
-""", unsafe_allow_html=True)
-
-# Créer les boutons avec des clés uniques pour appliquer un style spécifique
-if st.button("Rouge", key="red_button"):
-    st.write("Vous avez choisi la couleur Rouge.")
-
-if st.button("Jaune", key="yellow_button"):
-    st.write("Vous avez choisi la couleur Jaune.")
-
-if st.button("Bleu", key="blue_button"):
-    st.write("Vous avez choisi la couleur Bleue.")
+# Afficher les couleurs sélectionnées et leur apparence
+if selected_colors:
+    st.write("Vous avez sélectionné les couleurs suivantes :")
+    for color_name, rgb in selected_colors:
+        st.markdown(f"<div style='background-color: rgb{rgb}; padding: 10px; margin-bottom: 5px;'> {color_name} </div>", unsafe_allow_html=True)
+else:
+    st.write("Aucune couleur sélectionnée.")
