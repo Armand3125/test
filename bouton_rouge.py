@@ -14,16 +14,14 @@ pal = {
 # Titre de l'application
 st.title("Sélection de Couleurs")
 
-# Affichage des cases à cocher pour chaque couleur de la palette
-selected_colors = []
-for color_name, rgb in pal.items():
-    if st.checkbox(color_name, key=color_name):
-        selected_colors.append((color_name, rgb))
+# Afficher le sélecteur radio pour choisir une seule couleur
+selected_color = st.radio(
+    "Choisissez une couleur",
+    options=list(pal.keys()),  # Liste des noms des couleurs
+)
 
-# Afficher les couleurs sélectionnées et leur apparence
-if selected_colors:
-    st.write("Vous avez sélectionné les couleurs suivantes :")
-    for color_name, rgb in selected_colors:
-        st.markdown(f"<div style='background-color: rgb{rgb}; padding: 10px; margin-bottom: 5px;'> {color_name} </div>", unsafe_allow_html=True)
-else:
-    st.write("Aucune couleur sélectionnée.")
+# Afficher la couleur sélectionnée et son apparence
+if selected_color:
+    rgb = pal[selected_color]
+    st.write(f"Vous avez sélectionné la couleur : {selected_color}")
+    st.markdown(f"<div style='background-color: rgb{rgb}; padding: 10px; margin-bottom: 5px;'> {selected_color} </div>", unsafe_allow_html=True)
