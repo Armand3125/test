@@ -19,7 +19,6 @@ def get_random_color():
     return f"rgb{color_value}", color_name
 
 if st.button(""):
-    st.session_state.button_clicked = not st.session_state.button_clicked
     st.session_state.button_color, selected_color_name = get_random_color()
 
 st.markdown(f"""
@@ -34,7 +33,3 @@ st.markdown(f"""
     </style>
     """, unsafe_allow_html=True)
 
-st.title("Exemple de Bouton Toggle avec Streamlit")
-
-if st.session_state.button_clicked:
-    st.write(f"Couleur du bouton : {selected_color_name} - {st.session_state.button_color}")
