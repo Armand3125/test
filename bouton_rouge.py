@@ -65,13 +65,10 @@ def traiter_img(img, Nc, Nd, dim_max):
                 rgb = pal[color]
                 rgb_str = f"rgb({rgb[0]}, {rgb[1]}, {rgb[2]})"
 
-                # Créer un bouton pour chaque couleur
-                button_key = f'button_{idx}_{j}_{color}'
-
-                # Appliquer le style CSS au bouton avec la couleur spécifique
+                # Appliquer le style CSS au bouton avec la couleur
                 button_style = f"""
                 <style>
-                .stButton > button#{button_key} {{
+                .stButton > button {{
                     color: white;
                     background-color: {rgb_str};
                     padding: 10px 20px;
@@ -84,6 +81,8 @@ def traiter_img(img, Nc, Nd, dim_max):
                 st.markdown(button_style, unsafe_allow_html=True)
 
                 # Créer le bouton pour chaque couleur avec son label
+                button_key = f'button_{idx}_{j}_{color}'
+
                 if st.button(label=color, key=button_key):
                     st.session_state.selected_colors[cl] = j
                     new_img_arr = nouvelle_img(img_arr, labels, cl_proches, st.session_state.selected_colors, pal)
@@ -105,4 +104,4 @@ if uploaded_file is not None:
     traiter_img(uploaded_file, Nc, Nd, dim_max)
 
 if 'modified_image' in st.session_state:
-    st.image(st.session_state.modified_image, caption="Image Modifiée", width=int(1.5 * dim_max))
+    st.image(st.session_state.modified_image, caption="Image Modifiée", width=int(1.5 * dim_max)) 
