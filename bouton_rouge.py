@@ -68,7 +68,7 @@ def traiter_img(img, Nc, Nd, dim_max):
                 # Appliquer le style CSS pour chaque bouton avec la couleur correcte
                 button_style = f"""
                 <style>
-                .stButton#{f'button_{idx}_{j}_{color}'} > button {{
+                .stButton > button#{f'button_{idx}_{j}_{color}'} {{
                     color: white;
                     background-color: {rgb_str};
                     padding: 10px 20px;
