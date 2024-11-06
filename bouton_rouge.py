@@ -3,6 +3,7 @@ import streamlit as st
 # Appliquer des styles CSS pour colorer les boutons
 st.markdown("""
     <style>
+    /* Style général pour tous les boutons */
     .stButton > button {
         padding: 10px 20px;
         font-size: 18px;
@@ -10,30 +11,32 @@ st.markdown("""
         width: 100%;
     }
 
-    /* Style spécifique pour chaque bouton */
-    .stButton[data-baseweb="button"][key="red_button"] > button {
+    /* Style pour le premier bouton (Rouge) */
+    .stButton:nth-child(1) > button {
         background-color: red;
         color: white;
     }
 
-    .stButton[data-baseweb="button"][key="yellow_button"] > button {
+    /* Style pour le deuxième bouton (Jaune) */
+    .stButton:nth-child(2) > button {
         background-color: yellow;
         color: black;
     }
 
-    .stButton[data-baseweb="button"][key="blue_button"] > button {
+    /* Style pour le troisième bouton (Bleu) */
+    .stButton:nth-child(3) > button {
         background-color: blue;
         color: white;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# Créer les boutons avec des clés uniques pour appliquer un style spécifique
-if st.button("Rouge", key="red_button"):
+# Créer les boutons avec Streamlit
+if st.button("Rouge"):
     st.write("Vous avez choisi la couleur Rouge.")
 
-if st.button("Jaune", key="yellow_button"):
+if st.button("Jaune"):
     st.write("Vous avez choisi la couleur Jaune.")
 
-if st.button("Bleu", key="blue_button"):
+if st.button("Bleu"):
     st.write("Vous avez choisi la couleur Bleue.")
