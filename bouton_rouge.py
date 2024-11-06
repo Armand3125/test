@@ -56,37 +56,38 @@ def traiter_img(img, Nc, Nd, dim_max):
         st.session_state.modified_image = new_img_arr.astype('uint8')
 
         for idx, (cl, count) in enumerate(sorted_cls):
-            percentage = (count / total_px) * 100
-            st.write(f"Cluster {idx + 1} - {percentage:.2f}%")
-            col_options = cl_proches[cl]
+    percentage = (count / total_px) * 100
+    st.write(f"Cluster {idx + 1} - {percentage:.2f}%")
+    col_options = cl_proches[cl]
 
-            # Appliquer chaque couleur pour chaque bouton
-            for j, color in enumerate(col_options):
-                rgb = pal[color]
-                rgb_str = f"rgb({rgb[0]}, {rgb[1]}, {rgb[2]})"
+    # Appliquer chaque couleur pour chaque bouton
+    for j, color in enumerate(col_options):
+        rgb = pal[color]
+        rgb_str = f"rgb({rgb[0]}, {rgb[1]}, {rgb[2]})"
 
-                # Appliquer le style CSS au bouton avec la couleur
-                button_style = f"""
-                <style>
-                .stButton > button {{
-                    color: white;
-                    background-color: {rgb_str};
-                    padding: 10px 20px;
-                    font-size: 18px;
-                    border-radius: 5px;
-                    width: 100%;
-                }}
-                </style>
-                """
-                st.markdown(button_style, unsafe_allow_html=True)
+        # Appliquer le style CSS au bouton avec la couleur
+        button_style = f"""
+        <style>
+        .stButton > button#{button_key} {{
+            color: white;
+            background-color: {rgb_str};
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            width: 100%;
+        }}
+        </style>
+        """
+        st.markdown(button_style, unsafe_allow_html=True)
 
-                # Créer le bouton pour chaque couleur avec son label
-                button_key = f'button_{idx}_{j}_{color}'
+        # Créer le bouton pour chaque couleur avec son label
+        button_key = f'button_{idx}_{j}_{color}'
 
-                if st.button(label=color, key=button_key):
-                    st.session_state.selected_colors[cl] = j
-                    new_img_arr = nouvelle_img(img_arr, labels, cl_proches, st.session_state.selected_colors, pal)
-                    st.session_state.modified_image = new_img_arr.astype('uint8')
+        if st.button(label=color, key=button_key):
+            st.session_state.selected_colors[cl] = j
+            new_img_arr = nouvelle_img(img_arr, labels, cl_proches, st.session_state.selected_colors, pal)
+            st.session_state.modified_image = new_img_arr.astype('uint8')
+
 
     except Exception as e:
         st.error(f"Une erreur est survenue : {e}")
