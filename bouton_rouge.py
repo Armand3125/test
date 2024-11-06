@@ -60,6 +60,7 @@ def traiter_img(img, Nc, Nd, dim_max):
             st.write(f"Cluster {idx + 1} - {percentage:.2f}%")
             col_options = cl_proches[cl]
 
+            # Appliquer chaque couleur pour chaque bouton
             for j, color in enumerate(col_options):
                 rgb = pal[color]
                 rgb_str = f"rgb({rgb[0]}, {rgb[1]}, {rgb[2]})"
