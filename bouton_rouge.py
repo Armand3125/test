@@ -3,6 +3,7 @@ import random
 
 st.session_state.setdefault("button_clicked", False)
 st.session_state.setdefault("button_color", "rgb(200, 50, 100)")
+st.session_state.setdefault("selected_color_name", "Couleur par défaut")
 
 palette = {
     "Noir_Charbon": (0, 0, 0), "Blanc_Jade": (255, 255, 255),
@@ -20,7 +21,7 @@ def get_random_color():
 
 if st.button(""):
     st.session_state.button_clicked = not st.session_state.button_clicked
-    st.session_state.button_color, selected_color_name = get_random_color()
+    st.session_state.button_color, st.session_state.selected_color_name = get_random_color()
 
 st.markdown(f"""
     <style>
@@ -37,4 +38,4 @@ st.markdown(f"""
 st.title("Exemple de Bouton Toggle avec Streamlit")
 
 if st.session_state.button_clicked:
-    st.write(f"Couleur du bouton : {selected_color_name} - {st.session_state.button_color}")
+    st.write(f"Couleur du bouton : {st.session_state.selected_color_name} - {st.session_state.button_color}")
