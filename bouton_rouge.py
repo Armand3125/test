@@ -1,3 +1,4 @@
+pip install scikit-learn
 import streamlit as st
 from sklearn.cluster import KMeans
 from scipy.spatial import distance
