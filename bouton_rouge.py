@@ -64,7 +64,7 @@ def traiter_img(img, Nc, Nd, dim_max):
                 rgb = pal[color]
                 rgb_str = f"rgb({rgb[0]}, {rgb[1]}, {rgb[2]})"
 
-                # Personnalisation du style du bouton
+                # Appliquer le style CSS au bouton avec la couleur
                 button_style = f"""
                 <style>
                 .stButton > button {{
@@ -73,12 +73,13 @@ def traiter_img(img, Nc, Nd, dim_max):
                     padding: 10px 20px;
                     font-size: 18px;
                     border-radius: 5px;
+                    width: 100%;
                 }}
                 </style>
                 """
                 st.markdown(button_style, unsafe_allow_html=True)
 
-                # Créer le bouton pour chaque couleur
+                # Créer le bouton pour chaque couleur avec son label
                 button_key = f'button_{idx}_{j}_{color}'
 
                 if st.button(label=color, key=button_key):
