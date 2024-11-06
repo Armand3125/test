@@ -2,13 +2,13 @@ import streamlit as st
 
 st.session_state.setdefault("button_clicked", False)
 
-st.title("Exemple de Bouton Toggle avec Streamlit")
+st.title("Exemple de Bouton")
 st.markdown("""
     <style>
     .stButton > button {
-        color: white;
+        color: black;
         background-color: rgb(200, 50, 100);
-        padding: 10px 20px;
+        padding: 20px 20px;
         font-size: 18px;
         border-radius: 5px;
     }
