@@ -25,9 +25,8 @@ st.markdown(css, unsafe_allow_html=True)
 cols = st.columns([1, 1, 1, 1])
 
 with cols[0]:
-    selected_color_1 = {}
-    for color_name in pal.keys():
-        selected_color_1[color_name] = st.checkbox("", key=color_name, value=False)
+    color_options = [f"" for name in pal.keys()]  # Texte vide pour chaque option
+    selected_color_name_1 = st.radio("", color_options)
 
 with cols[1]:
     st.write("Couleurs disponibles :")
@@ -38,9 +37,7 @@ with cols[1]:
         )
 
 with cols[2]:
-    selected_color_2 = {}
-    for color_name in pal.keys():
-        selected_color_2[color_name] = st.checkbox("", key=color_name, value=False)
+    selected_color_name_2 = st.radio("", color_options)
 
 with cols[3]:
     st.write("Couleurs disponibles :")
@@ -50,20 +47,18 @@ with cols[3]:
             unsafe_allow_html=True
         )
 
-for color_name, selected in selected_color_1.items():
-    if selected:
-        rgb1 = pal[color_name]
-        st.write(f"Vous avez sélectionné la couleur (ensemble 1) : {color_name}")
-        st.markdown(
-            f"<div style='background-color: rgb{rgb1}; width: 50px; height: 50px; border-radius: 5px;'></div>",
-            unsafe_allow_html=True
-        )
+if selected_color_name_1:
+    rgb1 = pal[selected_color_name_1]
+    st.write(f"Vous avez sélectionné la couleur (ensemble 1) : {selected_color_name_1}")
+    st.markdown(
+        f"<div style='background-color: rgb{rgb1}; width: 50px; height: 50px; border-radius: 5px;'></div>",
+        unsafe_allow_html=True
+    )
 
-for color_name, selected in selected_color_2.items():
-    if selected:
-        rgb2 = pal[color_name]
-        st.write(f"Vous avez sélectionné la couleur (ensemble 2) : {color_name}")
-        st.markdown(
-            f"<div style='background-color: rgb{rgb2}; width: 50px; height: 50px; border-radius: 5px;'></div>",
-            unsafe_allow_html=True
-        )
+if selected_color_name_2:
+    rgb2 = pal[selected_color_name_2]
+    st.write(f"Vous avez sélectionné la couleur (ensemble 2) : {selected_color_name_2}")
+    st.markdown(
+        f"<div style='background-color: rgb{rgb2}; width: 50px; height: 50px; border-radius: 5px;'></div>",
+        unsafe_allow_html=True
+    )
