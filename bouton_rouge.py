@@ -30,7 +30,7 @@ cols = st.columns([1, 1, 1, 1])  # Quatre colonnes dans une même ligne
 # Premier groupe de colonnes (1 et 2)
 with cols[0]:
     # Liste des options de couleurs avec cases à cocher
-    color_options = [f"1" for name in pal.keys()]
+    color_options = list(pal.keys())  # Utiliser les noms des couleurs comme options
     selected_color_name_1 = st.radio("Choisissez une couleur", color_options)
 
 with cols[1]:
@@ -58,7 +58,7 @@ with cols[3]:
 
 # Afficher le texte et le carré de couleur sélectionnée pour le premier ensemble de colonnes
 if selected_color_name_1:
-    rgb1 = pal[selected_color_name_1]
+    rgb1 = pal[selected_color_name_1]  # Utiliser le nom de la couleur pour accéder à la valeur dans le dictionnaire
     st.write(f"Vous avez sélectionné la couleur (ensemble 1) : {selected_color_name_1}")
     st.markdown(
         f"<div style='background-color: rgb{rgb1}; width: 50px; height: 50px; border-radius: 5px;'></div>",
@@ -67,9 +67,9 @@ if selected_color_name_1:
 
 # Afficher le texte et le carré de couleur sélectionnée pour le deuxième ensemble de colonnes
 if selected_color_name_2:
-    rgb2 = pal[selected_color_name_2]
+    rgb2 = pal[selected_color_name_2]  # Utiliser le nom de la couleur pour accéder à la valeur dans le dictionnaire
     st.write(f"Vous avez sélectionné la couleur (ensemble 2) : {selected_color_name_2}")
     st.markdown(
         f"<div style='background-color: rgb{rgb2}; width: 50px; height: 50px; border-radius: 5px;'></div>",
         unsafe_allow_html=True
-    )  
+    )
