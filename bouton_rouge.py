@@ -18,17 +18,16 @@ st.title("Sélection de Couleurs")
 col1, col2 = st.columns(2)
 color_options = list(pal.keys())
 
-# Afficher la radio pour chaque colonne
+# Initialiser une variable pour la couleur sélectionnée
 selected_color_name = None
+
+# Créer une liste vide pour les boutons radio avec leur rendu en deux colonnes
 with col1:
-    for color_name in color_options[:len(color_options)//2]:  # Première moitié dans col1
-        if st.radio("Choisissez une couleur", [color_name], key=color_name):
-            selected_color_name = color_name
+    selected_color_name = st.radio("Choisissez une couleur", color_options[:len(color_options)//2])
 
 with col2:
-    for color_name in color_options[len(color_options)//2:]:  # Deuxième moitié dans col2
-        if st.radio("Choisissez une couleur", [color_name], key=color_name):
-            selected_color_name = color_name
+    if not selected_color_name:  # Si aucune couleur n'a été sélectionnée dans la première colonne
+        selected_color_name = st.radio(" ", color_options[len(color_options)//2:])
 
 # Afficher la couleur sélectionnée avec un carré de couleur
 if selected_color_name:
