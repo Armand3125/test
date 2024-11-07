@@ -47,6 +47,7 @@ with cols[3]:
             unsafe_allow_html=True
         )
 
+# Afficher la couleur et son carré pour le premier ensemble
 if selected_color_name_1:
     rgb1 = pal[selected_color_name_1]
     st.write(f"Vous avez sélectionné la couleur (ensemble 1) : {selected_color_name_1}")
@@ -55,6 +56,7 @@ if selected_color_name_1:
         unsafe_allow_html=True
     )
 
+# Afficher la couleur et son carré pour le deuxième ensemble
 if selected_color_name_2:
     rgb2 = pal[selected_color_name_2]
     st.write(f"Vous avez sélectionné la couleur (ensemble 2) : {selected_color_name_2}")
