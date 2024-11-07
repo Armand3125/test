@@ -24,13 +24,13 @@ st.markdown(css, unsafe_allow_html=True)
 
 cols = st.columns([1, 1, 1, 1, 1, 1, 1, 1])
 
-# Colonne 1 avec un titre
+# Colonne 1 : Couleur 1
 with cols[0]:
     st.subheader("Couleur 1")  # Titre de la colonne
     color_options = [name for name in pal.keys()]
     selected_color_name_1 = st.radio("", color_options, key="radio_1")
 
-# Colonne 2 avec un titre
+# Colonne 2 : Couleur 2
 with cols[1]:
     st.subheader("Couleur 2")  # Titre de la colonne
     for color_name, color_rgb in pal.items():
@@ -39,12 +39,12 @@ with cols[1]:
             unsafe_allow_html=True
         )
 
-# Colonne 3 avec un titre
+# Colonne 3 : Couleur 3
 with cols[2]:
     st.subheader("Couleur 3")  # Titre de la colonne
     selected_color_name_2 = st.radio("", color_options, key="radio_2")
 
-# Colonne 4 avec un titre
+# Colonne 4 : Couleur 4
 with cols[3]:
     st.subheader("Couleur 4")  # Titre de la colonne
     for color_name, color_rgb in pal.items():
@@ -53,12 +53,12 @@ with cols[3]:
             unsafe_allow_html=True
         )
 
-# Colonne 5 avec un titre
+# Colonne 5 : Couleur 5
 with cols[4]:
     st.subheader("Couleur 5")  # Titre de la colonne
     selected_color_name_3 = st.radio("", color_options, key="radio_3")
 
-# Colonne 6 avec un titre
+# Colonne 6 : Couleur 6
 with cols[5]:
     st.subheader("Couleur 6")  # Titre de la colonne
     for color_name, color_rgb in pal.items():
@@ -67,12 +67,12 @@ with cols[5]:
             unsafe_allow_html=True
         )
 
-# Colonne 7 avec un titre
+# Colonne 7 : Couleur 7
 with cols[6]:
     st.subheader("Couleur 7")  # Titre de la colonne
     selected_color_name_4 = st.radio("", color_options, key="radio_4")
 
-# Colonne 8 avec un titre
+# Colonne 8 : Couleur 8
 with cols[7]:
     st.subheader("Couleur 8")  # Titre de la colonne
     for color_name, color_rgb in pal.items():
