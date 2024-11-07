@@ -12,9 +12,7 @@ pal = {
 
 st.title("Sélection de Couleurs")
 
-cols = st.columns(4)
-
-# Définir le style CSS pour mettre les textes en rouge
+# Définir le style CSS pour changer la couleur du texte des cases à cocher
 css = """
     <style>
         .stRadio label {
@@ -24,6 +22,8 @@ css = """
     </style>
 """
 st.markdown(css, unsafe_allow_html=True)
+
+cols = st.columns(4)
 
 for i, col in enumerate(cols):
     with col:
