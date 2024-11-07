@@ -24,47 +24,64 @@ st.markdown(css, unsafe_allow_html=True)
 
 cols = st.columns([1, 1, 1, 1, 1, 1, 1, 1])
 
+# Colonne 1 avec un titre
 with cols[0]:
+    st.subheader("Couleur 1")  # Titre de la colonne
     color_options = [name for name in pal.keys()]
     selected_color_name_1 = st.radio("", color_options, key="radio_1")
 
+# Colonne 2 avec un titre
 with cols[1]:
+    st.subheader("Couleur 2")  # Titre de la colonne
     for color_name, color_rgb in pal.items():
         st.markdown(
             f"<div style='background-color: rgb{color_rgb}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>",
             unsafe_allow_html=True
         )
 
+# Colonne 3 avec un titre
 with cols[2]:
+    st.subheader("Couleur 3")  # Titre de la colonne
     selected_color_name_2 = st.radio("", color_options, key="radio_2")
 
+# Colonne 4 avec un titre
 with cols[3]:
+    st.subheader("Couleur 4")  # Titre de la colonne
     for color_name, color_rgb in pal.items():
         st.markdown(
             f"<div style='background-color: rgb{color_rgb}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>",
             unsafe_allow_html=True
         )
 
+# Colonne 5 avec un titre
 with cols[4]:
+    st.subheader("Couleur 5")  # Titre de la colonne
     selected_color_name_3 = st.radio("", color_options, key="radio_3")
 
+# Colonne 6 avec un titre
 with cols[5]:
+    st.subheader("Couleur 6")  # Titre de la colonne
     for color_name, color_rgb in pal.items():
         st.markdown(
             f"<div style='background-color: rgb{color_rgb}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>",
             unsafe_allow_html=True
         )
 
+# Colonne 7 avec un titre
 with cols[6]:
+    st.subheader("Couleur 7")  # Titre de la colonne
     selected_color_name_4 = st.radio("", color_options, key="radio_4")
 
+# Colonne 8 avec un titre
 with cols[7]:
+    st.subheader("Couleur 8")  # Titre de la colonne
     for color_name, color_rgb in pal.items():
         st.markdown(
             f"<div style='background-color: rgb{color_rgb}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>",
             unsafe_allow_html=True
         )
 
+# Affichage de la couleur sélectionnée pour chaque ensemble
 if selected_color_name_1:
     rgb1 = pal[selected_color_name_1]
     st.write(f"Vous avez sélectionné la couleur (ensemble 1) : {selected_color_name_1}")
