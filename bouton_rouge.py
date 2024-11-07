@@ -1,13 +1,13 @@
 import streamlit as st
 
 pal = {
-    "Noir Charbon": (0, 0, 0), "Blanc Jade": (255, 255, 255),
-    "Jaune Or": (228, 189, 104), "Bleu Cyan": (0, 134, 214),
-    "Violet Lila": (174, 150, 212), "Vert Gui": (63, 142, 67),
-    "Rouge Ecarlate": (222, 67, 67), "Bleu Marine": (0, 120, 191),
-    "Orange Mandarine": (249, 153, 99), "Vert Galaxie": (59, 102, 94),
-    "Bleu Glacier": (163, 216, 225), "Violet Magenta": (236, 0, 140),
-    "Gris Argent": (166, 169, 170), "Violet Basic": (94, 67, 183),
+    "NC": (0, 0, 0), "BJ": (255, 255, 255),
+    "JO": (228, 189, 104), "BC": (0, 134, 214),
+    "VL": (174, 150, 212), "VG": (63, 142, 67),
+    "RE": (222, 67, 67), "BM": (0, 120, 191),
+    "OM": (249, 153, 99), "VG": (59, 102, 94),
+    "BG": (163, 216, 225), "VM": (236, 0, 140),
+    "GA": (166, 169, 170), "VB": (94, 67, 183),
 }
 
 st.title("Sélection de Couleurs")
