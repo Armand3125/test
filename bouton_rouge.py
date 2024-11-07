@@ -20,6 +20,11 @@ css = """
             color: black;
             font-weight: normal;
         }
+        /* Réduire les marges latérales */
+        .block-container {
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
     </style>
 """
 st.markdown(css, unsafe_allow_html=True)
@@ -29,9 +34,8 @@ cols = st.columns([1, 1, 1, 1])  # Quatre colonnes dans une même ligne
 
 # Premier groupe de colonnes (1 et 2)
 with cols[0]:
-    # Liste des options de couleurs avec cases à cocher
-    color_options = [f"{name}" for name in pal.keys()]
-    selected_color_name_1 = st.radio("Choisissez une couleur", color_options)
+    # Liste des options de couleurs avec cases à cocher (sans texte)
+    selected_color_name_1 = st.radio("", [f"{name}" for name in pal.keys()], index=0)
 
 with cols[1]:
     # Affichage des rectangles colorés en face des cases à cocher
@@ -44,8 +48,8 @@ with cols[1]:
 
 # Deuxième groupe de colonnes (3 et 4)
 with cols[2]:
-    # Liste des options de couleurs avec cases à cocher pour le deuxième ensemble
-    selected_color_name_2 = st.radio("Choisissez une autre couleur", color_options)
+    # Liste des options de couleurs avec cases à cocher pour le deuxième ensemble (sans texte)
+    selected_color_name_2 = st.radio("", [f"{name}" for name in pal.keys()], index=0)
 
 with cols[3]:
     # Affichage des rectangles colorés pour le deuxième ensemble
