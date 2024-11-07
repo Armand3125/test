@@ -1,6 +1,5 @@
 import streamlit as st
 
-# Palette de couleurs
 pal = {
     "Noir Charbon": (0, 0, 0), "Blanc Jade": (255, 255, 255),
     "Jaune Or": (228, 189, 104), "Bleu Cyan": (0, 134, 214),
@@ -13,7 +12,6 @@ pal = {
 
 st.title("Sélection de Couleurs")
 
-# Définir le style CSS pour changer la couleur du texte des cases à cocher (texte noir)
 css = """
     <style>
         .stRadio label {
@@ -24,17 +22,13 @@ css = """
 """
 st.markdown(css, unsafe_allow_html=True)
 
-# Créer une ligne avec deux groupes de colonnes côte à côte
-cols = st.columns([1, 1, 1, 1])  # Quatre colonnes dans une même ligne
+cols = st.columns([1, 1, 1, 1])
 
-# Premier groupe de colonnes (1 et 2)
 with cols[0]:
-    # Liste des options de couleurs avec cases à cocher
-    color_options = list(pal.keys())  # Utiliser les noms des couleurs comme options
+    color_options = [f"{name}" for name in pal.keys()]
     selected_color_name_1 = st.radio("Choisissez une couleur", color_options)
 
 with cols[1]:
-    # Affichage des rectangles colorés en face des cases à cocher
     st.write("Couleurs disponibles :")
     for color_name, color_rgb in pal.items():
         st.markdown(
@@ -42,13 +36,10 @@ with cols[1]:
             unsafe_allow_html=True
         )
 
-# Deuxième groupe de colonnes (3 et 4)
 with cols[2]:
-    # Liste des options de couleurs avec cases à cocher pour le deuxième ensemble
     selected_color_name_2 = st.radio("Choisissez une autre couleur", color_options)
 
 with cols[3]:
-    # Affichage des rectangles colorés pour le deuxième ensemble
     st.write("Couleurs disponibles :")
     for color_name, color_rgb in pal.items():
         st.markdown(
@@ -56,18 +47,16 @@ with cols[3]:
             unsafe_allow_html=True
         )
 
-# Afficher le texte et le carré de couleur sélectionnée pour le premier ensemble de colonnes
 if selected_color_name_1:
-    rgb1 = pal[selected_color_name_1]  # Utiliser le nom de la couleur pour accéder à la valeur dans le dictionnaire
+    rgb1 = pal[selected_color_name_1]
     st.write(f"Vous avez sélectionné la couleur (ensemble 1) : {selected_color_name_1}")
     st.markdown(
         f"<div style='background-color: rgb{rgb1}; width: 50px; height: 50px; border-radius: 5px;'></div>",
         unsafe_allow_html=True
     )
 
-# Afficher le texte et le carré de couleur sélectionnée pour le deuxième ensemble de colonnes
 if selected_color_name_2:
-    rgb2 = pal[selected_color_name_2]  # Utiliser le nom de la couleur pour accéder à la valeur dans le dictionnaire
+    rgb2 = pal[selected_color_name_2]
     st.write(f"Vous avez sélectionné la couleur (ensemble 2) : {selected_color_name_2}")
     st.markdown(
         f"<div style='background-color: rgb{rgb2}; width: 50px; height: 50px; border-radius: 5px;'></div>",
