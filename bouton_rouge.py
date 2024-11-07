@@ -55,7 +55,6 @@ def traiter_img(img, Nc, Nd, dim_max):
         new_img_arr = nouvelle_img(img_arr, labels, cl_proches, st.session_state.selected_colors, pal)
         st.session_state.modified_image = new_img_arr.astype('uint8')
 
-        # Affichage des clusters avec les boutons "radio"
         for idx, (cl, count) in enumerate(sorted_cls):
             percentage = (count / total_px) * 100
             st.write(f"Cluster {idx + 1} - {percentage:.2f}%")
@@ -66,27 +65,17 @@ def traiter_img(img, Nc, Nd, dim_max):
                 rgb = pal[color]
                 rgb_str = f"rgb({rgb[0]}, {rgb[1]}, {rgb[2]})"
 
-                # Affichage des couleurs sous forme de cases avec les boutons "radio"
-                cols[j].markdown(
-                    f"<div style='background-color: {rgb_str}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>",
-                    unsafe_allow_html=True
-                )
+                # Afficher un rectangle coloré comme fond de radio button
+                cols[j].markdown(f"<div style='background-color: {rgb_str}; width: 40px; height: 20px; border-radius: 5px; display: inline-block;'></div>", unsafe_allow_html=True)
 
-            # Affichage des boutons "radio" pour chaque cluster
-            with st.container():
-                selected_color = st.radio(
-                    f"Choisissez la couleur pour le cluster {idx + 1}",
-                    options=col_options,
-                    key=f"radio_{idx}",
-                    index=st.session_state.selected_colors[idx]  # Par défaut la couleur sélectionnée est celle en session
-                )
+                # Utiliser un bouton radio pour chaque option de couleur
+                color_name = list(pal.keys())[list(pal.values()).index(rgb)]
+                selected_color = st.radio(f"Sélectionner Couleur {idx+1}", options=[color_name], key=f'color_selector_{idx}_{j}')
 
-                # Sauvegarde du choix de la couleur dans la session
-                st.session_state.selected_colors[idx] = col_options.index(selected_color)
-
-                # Mettre à jour l'image en fonction du choix
-                new_img_arr = nouvelle_img(img_arr, labels, cl_proches, st.session_state.selected_colors, pal)
-                st.session_state.modified_image = new_img_arr.astype('uint8')
+                if selected_color:
+                    st.session_state.selected_colors[cl] = j
+                    new_img_arr = nouvelle_img(img_arr, labels, cl_proches, st.session_state.selected_colors, pal)
+                    st.session_state.modified_image = new_img_arr.astype('uint8')
 
     except Exception as e:
         st.error(f"Une erreur est survenue : {e}")
