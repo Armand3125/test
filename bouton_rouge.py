@@ -25,7 +25,7 @@ css = """
 st.markdown(css, unsafe_allow_html=True)
 
 # Créer une ligne avec deux groupes de colonnes côte à côte
-cols = st.columns([1, 3, 1, 3])  # Quatre colonnes dans une même ligne
+cols = st.columns([1, 1, 1, 1])  # Quatre colonnes dans une même ligne
 
 # Premier groupe de colonnes (1 et 2)
 with cols[0]:
