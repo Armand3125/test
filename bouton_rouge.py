@@ -14,6 +14,17 @@ st.title("Sélection de Couleurs")
 
 cols = st.columns(4)
 
+# Définir le style CSS pour mettre les textes en rouge
+css = """
+    <style>
+        .stRadio label {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+"""
+st.markdown(css, unsafe_allow_html=True)
+
 for i, col in enumerate(cols):
     with col:
         color_options = [f"{name}" for name in pal.keys()]
