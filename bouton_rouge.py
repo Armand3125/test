@@ -14,23 +14,21 @@ pal = {
 # Titre de l'application
 st.title("Sélection de Couleurs")
 
-# Diviser les options de couleur en deux colonnes visuelles
+# Diviser les options en deux colonnes pour l'affichage visuel
 color_options = list(pal.keys())
 col1, col2 = st.columns(2)
 
-# Initialiser une variable pour la couleur sélectionnée
-selected_color_name = None
+# Créer une seule radio pour les options de couleur
+selected_color_name = st.radio("Choisissez une couleur", color_options)
 
-# Remplir les colonnes avec les options de couleurs
+# Affichage des couleurs en colonnes pour une disposition visuelle organisée
 with col1:
-    for color_name in color_options[:len(color_options) // 2]:  # Première moitié dans la première colonne
-        if st.radio("Choisissez une couleur", [color_name], key=color_name):
-            selected_color_name = color_name
+    for color_name in color_options[:len(color_options) // 2]:  # Première moitié des couleurs
+        st.write(f"◼️ {color_name}")  # Icône carrée pour représenter la couleur
 
 with col2:
-    for color_name in color_options[len(color_options) // 2:]:  # Deuxième moitié dans la seconde colonne
-        if st.radio(" ", [color_name], key=color_name + "_col2"):
-            selected_color_name = color_name
+    for color_name in color_options[len(color_options) // 2:]:  # Deuxième moitié des couleurs
+        st.write(f"◼️ {color_name}")
 
 # Afficher la couleur sélectionnée avec un carré de couleur
 if selected_color_name:
