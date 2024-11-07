@@ -24,23 +24,21 @@ css = """
 """
 st.markdown(css, unsafe_allow_html=True)
 
-# Créer une seule ligne avec deux colonnes
-cols = st.columns([2, 2])  # Ratio 2:2 pour équilibrer la largeur des colonnes
+# Créer une colonne pour les cases à cocher et une autre pour les messages explicatifs
+cols = st.columns([1, 1])  # Créer deux colonnes de largeur égale
 
 with cols[0]:
-    # Liste des options de couleurs
+    # Liste des options de couleurs avec cases à cocher
     color_options = [f"{name}" for name in pal.keys()]
     selected_color_name = st.radio("Choisissez une couleur", color_options)
 
-    st.write("Couleurs disponibles :")
-    for color_name, color_rgb in pal.items():
-        st.markdown(
-            f"- {color_name} : <div style='background-color: rgb{color_rgb}; width: 20px; height: 20px; display: inline-block; border-radius: 3px;'></div>",
-            unsafe_allow_html=True
-        )
-
 with cols[1]:
-    # Affichage de la couleur sélectionnée avec son carré
+    # Affichage des messages explicatifs en face des cases à cocher
+    st.write("Couleurs disponibles :")
+    for color_name in pal.keys():
+        st.write(f"- {color_name}")
+
+    # Affichage de la couleur sélectionnée
     if selected_color_name:
         rgb = pal[selected_color_name]
         st.write(f"Vous avez sélectionné la couleur : {selected_color_name}")
