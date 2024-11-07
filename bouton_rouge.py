@@ -14,24 +14,15 @@ pal = {
 # Titre de l'application
 st.title("Sélection de Couleurs")
 
-# Créer des labels avec des rectangles colorés à côté des options
-color_options = [
-    f"<div style='background-color: rgb{rgb}; width: 30px; height: 30px; display: inline-block; margin-right: 10px;'></div>{color_name}"
-    for color_name, rgb in pal.items()
-]
+# Affichage des options de couleur dans une radio
+color_options = [f"{name}" for name in pal.keys()]
+selected_color_name = st.radio("Choisissez une couleur", color_options)
 
-# Sélectionner une couleur via radio avec des rectangles colorés
-selected_color = st.radio(
-    "Choisissez une couleur",
-    options=color_options,
-    format_func=lambda x: ""  # Cela cache le texte en face de chaque option
-)
-
-# Extraire le nom de la couleur sélectionnée
-selected_color_name = next(color_name for color_name, rgb in pal.items() if f"<div style='background-color: rgb{rgb}" in selected_color)
-
-# Afficher la couleur sélectionnée et son apparence
-if selected_color:
+# Afficher la couleur sélectionnée avec un carré de couleur
+if selected_color_name:
     rgb = pal[selected_color_name]
     st.write(f"Vous avez sélectionné la couleur : {selected_color_name}")
-    st.markdown(f"<div style='background-color: rgb{rgb}; padding: 10px; margin-bottom: 5px;'> </div>", unsafe_allow_html=True)
+    st.markdown(
+        f"<div style='background-color: rgb{rgb}; width: 50px; height: 50px; border-radius: 5px;'></div>",
+        unsafe_allow_html=True
+    )
