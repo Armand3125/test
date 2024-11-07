@@ -78,3 +78,11 @@ if selected_color_name_3:
         f"<div style='background-color: rgb{rgb3}; width: 50px; height: 50px; border-radius: 5px;'></div>",
         unsafe_allow_html=True
     )
+
+if selected_color_name_4:
+    rgb4 = pal[selected_color_name_4]
+    st.write(f"Vous avez sélectionné la couleur (ensemble 4) : {selected_color_name_4}")
+    st.markdown(
+        f"<div style='background-color: rgb{rgb4}; width: 50px; height: 50px; border-radius: 5px;'></div>",
+        unsafe_allow_html=True
+    )
