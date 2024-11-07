@@ -37,7 +37,7 @@ with cols[1]:
     st.write("Couleurs disponibles :")
     for color_name, color_rgb in pal.items():
         st.markdown(
-            f"<div style='background-color: rgb{color_rgb}; width: 50px; height: 10px; border-radius: 5px; margin-bottom: 10px;'></div>",
+            f"<div style='background-color: rgb{color_rgb}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 10px;'></div>",
             unsafe_allow_html=True
         )
 
