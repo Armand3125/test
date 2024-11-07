@@ -4,7 +4,7 @@ from scipy.spatial import distance
 from PIL import Image
 import numpy as np
 
-# Palette de couleurs définie
+# Palette de couleurs
 pal = {
     "Noir_Charbon": (0, 0, 0), "Blanc_Jade": (255, 255, 255),
     "Jaune_Or": (228, 189, 104), "Bleu_Cyan": (0, 134, 214),
@@ -15,7 +15,7 @@ pal = {
     "Gris_Argent": (166, 169, 170), "Violet_Basic": (94, 67, 183),
 }
 
-# Calculer les couleurs les plus proches
+# Calcul des couleurs les plus proches
 def proches(c, pal):
     dists = [(n, distance.euclidean(c, col)) for n, col in pal.items()]
     return sorted(dists, key=lambda x: x[1])
@@ -23,7 +23,7 @@ def proches(c, pal):
 def proches_lim(c, pal, n):
     return [n for n, _ in proches(c, pal)[:n]]
 
-# Créer une nouvelle image en mappant les clusters aux couleurs de la palette
+# Créer une nouvelle image avec les couleurs sélectionnées
 def nouvelle_img(img_arr, labels, cl_proches, selected_colors, pal):
     color_map = {i: pal[cl_proches[i][selected_colors[i]]] for i in range(len(cl_proches))}
     img_mapped = np.array([color_map[label] for label in labels])
@@ -55,31 +55,28 @@ def traiter_img(img, Nc, Nd, dim_max):
         new_img_arr = nouvelle_img(img_arr, labels, cl_proches, st.session_state.selected_colors, pal)
         st.session_state.modified_image = new_img_arr.astype('uint8')
 
-        # Interface de sélection de couleurs par bouton
+        # Interface de sélection de couleurs par checkbox
         for idx, (cl, count) in enumerate(sorted_cls):
             percentage = (count / total_px) * 100
             st.write(f"Cluster {idx + 1} - {percentage:.2f}%")
             col_options = cl_proches[cl]
 
-            # Créer des colonnes pour afficher les couleurs et les boutons
-            cols = st.columns(len(col_options))
+            # Afficher les options de couleur avec des cases à cocher
             selected_color = st.session_state.selected_colors[cl]
+            color_keys = [pal[key] for key in col_options]
+            for j, color_rgb in enumerate(color_keys):
+                rgb_str = f"rgb({color_rgb[0]}, {color_rgb[1]}, {color_rgb[2]})"
+                if st.checkbox(f"Cluster {idx+1} - {col_options[j]}", key=f"checkbox_{idx}_{j}", value=(selected_color == j)):
+                    # Si la case est cochée, définir la couleur sélectionnée
+                    st.session_state.selected_colors[cl] = j
+                    new_img_arr = nouvelle_img(img_arr, labels, cl_proches, st.session_state.selected_colors, pal)
+                    st.session_state.modified_image = new_img_arr.astype('uint8')
 
-            # Afficher les couleurs avec un bouton pour chaque couleur
-            for j, color in enumerate(col_options):
-                rgb = pal[color]
-                rgb_str = f"rgb({rgb[0]}, {rgb[1]}, {rgb[2]})"
-                with cols[j]:
-                    # Affichage du bouton, seul un bouton peut être sélectionné par cluster
-                    button_key = f'button_{idx}_{j}_{color}'
-                    if st.button(f"Cluster {idx+1} - {color}", key=button_key, help=color):
-                        # Si le bouton est pressé, sélectionner cette couleur pour le cluster
-                        st.session_state.selected_colors[cl] = j
-                        new_img_arr = nouvelle_img(img_arr, labels, cl_proches, st.session_state.selected_colors, pal)
-                        st.session_state.modified_image = new_img_arr.astype('uint8')
-
-                    # Affichage du rectangle coloré
-                    st.markdown(f"<div style='background-color: {rgb_str}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>", unsafe_allow_html=True)
+                # Affichage du rectangle coloré
+                st.markdown(
+                    f"<div style='background-color: {rgb_str}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>",
+                    unsafe_allow_html=True
+                )
 
     except Exception as e:
         st.error(f"Une erreur est survenue : {e}")
