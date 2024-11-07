@@ -1,5 +1,6 @@
 import streamlit as st
 
+# Palette de couleurs
 pal = {
     "Noir Charbon": (0, 0, 0), "Blanc Jade": (255, 255, 255),
     "Jaune Or": (228, 189, 104), "Bleu Cyan": (0, 134, 214),
@@ -12,27 +13,26 @@ pal = {
 
 st.title("Sélection de Couleurs")
 
-# Définir le style CSS pour changer la couleur du texte des cases à cocher
+# Définir le style CSS pour changer la couleur du texte des cases à cocher (texte noir)
 css = """
     <style>
         .stRadio label {
-            color: red;
-            font-weight: bold;
+            color: black;
+            font-weight: normal;
         }
     </style>
 """
 st.markdown(css, unsafe_allow_html=True)
 
-cols = st.columns(4)
+# Créer une seule colonne pour les sélections de couleur
+color_options = [f"{name}" for name in pal.keys()]
+selected_color_name = st.radio("Choisissez une couleur", color_options)
 
-for i, col in enumerate(cols):
-    with col:
-        color_options = [f"{name}" for name in pal.keys()]
-        selected_color_name = st.radio(f"Choisissez une couleur ({i+1})", color_options, key=f"color_select_{i}")
-        if selected_color_name:
-            rgb = pal[selected_color_name]
-            st.write(f"Vous avez sélectionné la couleur : {selected_color_name}")
-            st.markdown(
-                f"<div style='background-color: rgb{rgb}; width: 50px; height: 50px; border-radius: 5px;'></div>",
-                unsafe_allow_html=True
-            )
+# Affichage de la couleur sélectionnée et du carré de couleur
+if selected_color_name:
+    rgb = pal[selected_color_name]
+    st.write(f"Vous avez sélectionné la couleur : {selected_color_name}")
+    st.markdown(
+        f"<div style='background-color: rgb{rgb}; width: 50px; height: 50px; border-radius: 5px;'></div>",
+        unsafe_allow_html=True
+    )
