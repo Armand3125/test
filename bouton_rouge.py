@@ -25,7 +25,7 @@ css = """
 st.markdown(css, unsafe_allow_html=True)
 
 # Créer une colonne pour les cases à cocher et une autre pour les rectangles de couleur
-cols = st.columns([1, 1])  # Créer deux colonnes de largeur égale
+cols = st.columns([2, 1])  # Modifier le ratio pour rapprocher les colonnes
 
 with cols[0]:
     # Liste des options de couleurs avec cases à cocher
