@@ -14,21 +14,9 @@ pal = {
 # Titre de l'application
 st.title("Sélection de Couleurs")
 
-# Diviser les options en deux colonnes pour l'affichage visuel
-color_options = list(pal.keys())
-col1, col2 = st.columns(2)
-
-# Créer une seule radio pour les options de couleur
+# Affichage des options de couleur dans une radio
+color_options = [f"{name}" for name in pal.keys()]
 selected_color_name = st.radio("Choisissez une couleur", color_options)
-
-# Affichage des couleurs en colonnes pour une disposition visuelle organisée
-with col1:
-    for color_name in color_options[:len(color_options) // 2]:  # Première moitié des couleurs
-        st.write(f"◼️ {color_name}")  # Icône carrée pour représenter la couleur
-
-with col2:
-    for color_name in color_options[len(color_options) // 2:]:  # Deuxième moitié des couleurs
-        st.write(f"◼️ {color_name}")
 
 # Afficher la couleur sélectionnée avec un carré de couleur
 if selected_color_name:
@@ -37,4 +25,4 @@ if selected_color_name:
     st.markdown(
         f"<div style='background-color: rgb{rgb}; width: 50px; height: 50px; border-radius: 5px;'></div>",
         unsafe_allow_html=True
-    )
+    ) 
