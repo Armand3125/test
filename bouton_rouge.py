@@ -24,9 +24,10 @@ css = """
 """
 st.markdown(css, unsafe_allow_html=True)
 
-# Créer les premières colonnes (1 et 2)
-cols = st.columns([1, 3])  # Modifier le ratio pour rapprocher les colonnes
+# Créer une ligne avec deux groupes de colonnes côte à côte
+cols = st.columns([1, 3, 1, 3])  # Quatre colonnes dans une même ligne
 
+# Premier groupe de colonnes (1 et 2)
 with cols[0]:
     # Liste des options de couleurs avec cases à cocher
     color_options = [f"{name}" for name in pal.keys()]
@@ -41,14 +42,12 @@ with cols[1]:
             unsafe_allow_html=True
         )
 
-# Créer les deuxièmes colonnes (3 et 4)
-cols2 = st.columns([1, 3])  # Une autre paire de colonnes
-
-with cols2[0]:
+# Deuxième groupe de colonnes (3 et 4)
+with cols[2]:
     # Liste des options de couleurs avec cases à cocher pour le deuxième ensemble
     selected_color_name_2 = st.radio("Choisissez une autre couleur", color_options)
 
-with cols2[1]:
+with cols[3]:
     # Affichage des rectangles colorés pour le deuxième ensemble
     st.write("Couleurs disponibles :")
     for color_name, color_rgb in pal.items():
