@@ -31,12 +31,12 @@ cols = st.columns([1, 1, 1, 1])  # Quatre colonnes dans une même ligne
 with cols[0]:
     # Liste des options de couleurs avec cases à cocher sans texte ni couleur
     color_options = [f"{name}" for name in pal.keys()]
-    selected_color_name_1 = st.radio("", color_options)  # Case à cocher sans texte visible
+    selected_color_name_1 = st.radio("Sélectionnez la couleur 1", color_options)  # Identifiant unique ici
 
 # Deuxième groupe de colonnes (3 et 4)
 with cols[2]:
     # Liste des options de couleurs avec cases à cocher sans texte ni couleur
-    selected_color_name_2 = st.radio("", color_options)  # Case à cocher sans texte visible
+    selected_color_name_2 = st.radio("Sélectionnez la couleur 2", color_options)  # Identifiant unique ici
 
 # Afficher la couleur sélectionnée pour le premier ensemble de colonnes (si une couleur est choisie)
 if selected_color_name_1:
