@@ -24,13 +24,13 @@ css = """
 """
 st.markdown(css, unsafe_allow_html=True)
 
-# Créer une colonne pour les cases à cocher et une autre pour les rectangles de couleur
+# Créer les premières colonnes (1 et 2)
 cols = st.columns([1, 3])  # Modifier le ratio pour rapprocher les colonnes
 
 with cols[0]:
     # Liste des options de couleurs avec cases à cocher
     color_options = [f"{name}" for name in pal.keys()]
-    selected_color_name = st.radio("Choisissez une couleur", color_options)
+    selected_color_name_1 = st.radio("Choisissez une couleur", color_options)
 
 with cols[1]:
     # Affichage des rectangles colorés en face des cases à cocher
@@ -41,11 +41,36 @@ with cols[1]:
             unsafe_allow_html=True
         )
 
-# Afficher le texte et le carré de couleur sélectionnée sous les deux colonnes
-if selected_color_name:
-    rgb = pal[selected_color_name]
-    st.write(f"Vous avez sélectionné la couleur : {selected_color_name}")
+# Créer les deuxièmes colonnes (3 et 4)
+cols2 = st.columns([1, 3])  # Une autre paire de colonnes
+
+with cols2[0]:
+    # Liste des options de couleurs avec cases à cocher pour le deuxième ensemble
+    selected_color_name_2 = st.radio("Choisissez une autre couleur", color_options)
+
+with cols2[1]:
+    # Affichage des rectangles colorés pour le deuxième ensemble
+    st.write("Couleurs disponibles :")
+    for color_name, color_rgb in pal.items():
+        st.markdown(
+            f"<div style='background-color: rgb{color_rgb}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>",
+            unsafe_allow_html=True
+        )
+
+# Afficher le texte et le carré de couleur sélectionnée pour le premier ensemble de colonnes
+if selected_color_name_1:
+    rgb1 = pal[selected_color_name_1]
+    st.write(f"Vous avez sélectionné la couleur (ensemble 1) : {selected_color_name_1}")
     st.markdown(
-        f"<div style='background-color: rgb{rgb}; width: 50px; height: 50px; border-radius: 5px;'></div>",
+        f"<div style='background-color: rgb{rgb1}; width: 50px; height: 50px; border-radius: 5px;'></div>",
+        unsafe_allow_html=True
+    )
+
+# Afficher le texte et le carré de couleur sélectionnée pour le deuxième ensemble de colonnes
+if selected_color_name_2:
+    rgb2 = pal[selected_color_name_2]
+    st.write(f"Vous avez sélectionné la couleur (ensemble 2) : {selected_color_name_2}")
+    st.markdown(
+        f"<div style='background-color: rgb{rgb2}; width: 50px; height: 50px; border-radius: 5px;'></div>",
         unsafe_allow_html=True
     )
