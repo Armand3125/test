@@ -17,7 +17,7 @@ cols = st.columns(4)
 for i, col in enumerate(cols):
     with col:
         color_options = [f"{name}" for name in pal.keys()]
-        
+        selected_color_name = st.radio(f"Choisissez une couleur ({i+1})", color_options, key=f"color_select_{i}")
         if selected_color_name:
             rgb = pal[selected_color_name]
             st.write(f"Vous avez sélectionné la couleur : {selected_color_name}")
