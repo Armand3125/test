@@ -24,9 +24,10 @@ st.markdown(css, unsafe_allow_html=True)
 
 cols = st.columns([1, 1, 1, 1])
 
+# Première colonne - choix de la première couleur
 with cols[0]:
-    color_options = [f"" for name in pal.keys()]  # Texte vide pour chaque option
-    selected_color_name_1 = st.radio("", color_options, key="radio_1")  # ID unique pour cette colonne
+    color_options = [name for name in pal.keys()]  # Liste des couleurs
+    selected_color_name_1 = st.radio("Choisissez une couleur", color_options, key="radio_1")  # ID unique pour cette colonne
 
 with cols[1]:
     st.write("Couleurs disponibles :")
@@ -36,8 +37,9 @@ with cols[1]:
             unsafe_allow_html=True
         )
 
+# Deuxième colonne - choix de la deuxième couleur
 with cols[2]:
-    selected_color_name_2 = st.radio("", color_options, key="radio_2")  # ID unique pour cette colonne
+    selected_color_name_2 = st.radio("Choisissez une autre couleur", color_options, key="radio_2")  # ID unique pour cette colonne
 
 with cols[3]:
     st.write("Couleurs disponibles :")
@@ -47,7 +49,7 @@ with cols[3]:
             unsafe_allow_html=True
         )
 
-# Afficher la couleur et son carré pour le premier ensemble
+# Affichage du carré de couleur et du texte pour la première sélection
 if selected_color_name_1:
     rgb1 = pal[selected_color_name_1]
     st.write(f"Vous avez sélectionné la couleur (ensemble 1) : {selected_color_name_1}")
@@ -56,7 +58,7 @@ if selected_color_name_1:
         unsafe_allow_html=True
     )
 
-# Afficher la couleur et son carré pour le deuxième ensemble
+# Affichage du carré de couleur et du texte pour la deuxième sélection
 if selected_color_name_2:
     rgb2 = pal[selected_color_name_2]
     st.write(f"Vous avez sélectionné la couleur (ensemble 2) : {selected_color_name_2}")
