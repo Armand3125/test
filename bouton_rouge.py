@@ -60,26 +60,26 @@ def traiter_img(img, Nc, Nd, dim_max):
             percentage = (count / total_px) * 100
             st.write(f"Cluster {idx + 1} - {percentage:.2f}%")
             col_options = cl_proches[cl]
-            
-            selected_color = st.session_state.selected_colors[cl]
-            selected_colors = []
 
+            # Créer des colonnes pour afficher les cases à cocher et les couleurs
+            cols = st.columns(len(col_options))
+            selected_color = st.session_state.selected_colors[cl]
+            
+            # Afficher les couleurs dans des colonnes et des cases à cocher
             for j, color in enumerate(col_options):
                 rgb = pal[color]
                 rgb_str = f"rgb({rgb[0]}, {rgb[1]}, {rgb[2]})"
-                checkbox_key = f'checkbox_{idx}_{j}_{color}'
+                with cols[j]:
+                    # Affichage de la case à cocher avec un fond coloré
+                    checked = st.checkbox("", key=f'checkbox_{idx}_{j}_{color}', value=(j == selected_color))
+                    if checked:
+                        # Si la case est cochée, la couleur est sélectionnée
+                        st.session_state.selected_colors[cl] = j
+                        new_img_arr = nouvelle_img(img_arr, labels, cl_proches, st.session_state.selected_colors, pal)
+                        st.session_state.modified_image = new_img_arr.astype('uint8')
 
-                # Afficher un carré coloré avec la case à cocher
-                checked = st.checkbox(label="", key=checkbox_key, value=(j == selected_color))
-                
-                if checked:
-                    selected_colors.append(j)
-
-            # Mettre à jour la sélection
-            if selected_colors:
-                st.session_state.selected_colors[cl] = selected_colors[0]
-                new_img_arr = nouvelle_img(img_arr, labels, cl_proches, st.session_state.selected_colors, pal)
-                st.session_state.modified_image = new_img_arr.astype('uint8')
+                    # Affichage du rectangle coloré
+                    st.markdown(f"<div style='background-color: {rgb_str}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>", unsafe_allow_html=True)
 
     except Exception as e:
         st.error(f"Une erreur est survenue : {e}")
