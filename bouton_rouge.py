@@ -55,25 +55,25 @@ def traiter_img(img, Nc, Nd, dim_max):
         new_img_arr = nouvelle_img(img_arr, labels, cl_proches, st.session_state.selected_colors, pal)
         st.session_state.modified_image = new_img_arr.astype('uint8')
 
-        # Interface de sélection de couleurs par cases à cocher
+        # Interface de sélection de couleurs par bouton
         for idx, (cl, count) in enumerate(sorted_cls):
             percentage = (count / total_px) * 100
             st.write(f"Cluster {idx + 1} - {percentage:.2f}%")
             col_options = cl_proches[cl]
 
-            # Créer des colonnes pour afficher les cases à cocher et les couleurs
+            # Créer des colonnes pour afficher les couleurs et les boutons
             cols = st.columns(len(col_options))
             selected_color = st.session_state.selected_colors[cl]
-            
-            # Afficher les couleurs dans des colonnes et des cases à cocher
+
+            # Afficher les couleurs avec un bouton pour chaque couleur
             for j, color in enumerate(col_options):
                 rgb = pal[color]
                 rgb_str = f"rgb({rgb[0]}, {rgb[1]}, {rgb[2]})"
                 with cols[j]:
-                    # Affichage de la case à cocher avec un fond coloré
-                    checked = st.checkbox("", key=f'checkbox_{idx}_{j}_{color}', value=(j == selected_color))
-                    if checked:
-                        # Si la case est cochée, la couleur est sélectionnée
+                    # Affichage du bouton, seul un bouton peut être sélectionné par cluster
+                    button_key = f'button_{idx}_{j}_{color}'
+                    if st.button(f"Cluster {idx+1} - {color}", key=button_key, help=color):
+                        # Si le bouton est pressé, sélectionner cette couleur pour le cluster
                         st.session_state.selected_colors[cl] = j
                         new_img_arr = nouvelle_img(img_arr, labels, cl_proches, st.session_state.selected_colors, pal)
                         st.session_state.modified_image = new_img_arr.astype('uint8')
