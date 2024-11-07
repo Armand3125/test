@@ -30,7 +30,7 @@ cols = st.columns([1, 1, 1, 1])  # Quatre colonnes dans une même ligne
 # Premier groupe de colonnes (1 et 2)
 with cols[0]:
     # Liste des options de couleurs avec cases à cocher
-    color_options = [f"1" for name in pal.keys()]
+    color_options = [f"name" for name in pal.keys()]
     selected_color_name_1 = st.radio("Choisissez une couleur", color_options)
 
 with cols[1]:
