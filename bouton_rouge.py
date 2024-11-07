@@ -41,11 +41,11 @@ with cols[1]:
             unsafe_allow_html=True
         )
 
-    # Affichage de la couleur sélectionnée sous forme de carré
-    if selected_color_name:
-        rgb = pal[selected_color_name]
-        st.write(f"Vous avez sélectionné la couleur : {selected_color_name}")
-        st.markdown(
-            f"<div style='background-color: rgb{rgb}; width: 50px; height: 50px; border-radius: 5px;'></div>",
-            unsafe_allow_html=True
-        )
+# Afficher le texte et le carré de couleur sélectionnée sous les deux colonnes
+if selected_color_name:
+    rgb = pal[selected_color_name]
+    st.write(f"Vous avez sélectionné la couleur : {selected_color_name}")
+    st.markdown(
+        f"<div style='background-color: rgb{rgb}; width: 50px; height: 50px; border-radius: 5px;'></div>",
+        unsafe_allow_html=True
+    )
