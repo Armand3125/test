@@ -22,7 +22,7 @@ css = """
 """
 st.markdown(css, unsafe_allow_html=True)
 
-cols = st.columns([1, 1, 1, 1, 1, 1])
+cols = st.columns([1, 1, 1, 1, 1, 1, 1, 1])
 
 with cols[0]:
     color_options = [name for name in pal.keys()]
@@ -49,6 +49,16 @@ with cols[4]:
     selected_color_name_3 = st.radio("", color_options, key="radio_3")
 
 with cols[5]:
+    for color_name, color_rgb in pal.items():
+        st.markdown(
+            f"<div style='background-color: rgb{color_rgb}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>",
+            unsafe_allow_html=True
+        )
+
+with cols[6]:
+    selected_color_name_4 = st.radio("", color_options, key="radio_4")
+
+with cols[7]:
     for color_name, color_rgb in pal.items():
         st.markdown(
             f"<div style='background-color: rgb{color_rgb}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>",
