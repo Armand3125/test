@@ -26,7 +26,7 @@ cols = st.columns([1, 1, 1, 1])
 
 with cols[0]:
     color_options = [f"" for name in pal.keys()]  # Texte vide pour chaque option
-    selected_color_name_1 = st.radio("", color_options)
+    selected_color_name_1 = st.radio("", color_options, key="radio_1")  # ID unique pour cette colonne
 
 with cols[1]:
     st.write("Couleurs disponibles :")
@@ -37,7 +37,7 @@ with cols[1]:
         )
 
 with cols[2]:
-    selected_color_name_2 = st.radio("", color_options)
+    selected_color_name_2 = st.radio("", color_options, key="radio_2")  # ID unique pour cette colonne
 
 with cols[3]:
     st.write("Couleurs disponibles :")
