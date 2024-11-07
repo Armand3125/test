@@ -14,9 +14,21 @@ pal = {
 # Titre de l'application
 st.title("Sélection de Couleurs")
 
-# Affichage des options de couleur dans une radio
-color_options = [f"{name}" for name in pal.keys()]
-selected_color_name = st.radio("Choisissez une couleur", color_options)
+# Diviser les options de couleur en deux colonnes
+col1, col2 = st.columns(2)
+color_options = list(pal.keys())
+
+# Afficher la radio pour chaque colonne
+selected_color_name = None
+with col1:
+    for color_name in color_options[:len(color_options)//2]:  # Première moitié dans col1
+        if st.radio("Choisissez une couleur", [color_name], key=color_name):
+            selected_color_name = color_name
+
+with col2:
+    for color_name in color_options[len(color_options)//2:]:  # Deuxième moitié dans col2
+        if st.radio("Choisissez une couleur", [color_name], key=color_name):
+            selected_color_name = color_name
 
 # Afficher la couleur sélectionnée avec un carré de couleur
 if selected_color_name:
