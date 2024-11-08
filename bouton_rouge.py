@@ -58,12 +58,12 @@ for i in range(num_selections):
         for idx, (color_name, color_rgb) in enumerate(pal.items()):
             if idx == 0:  # Pour le premier rectangle, ajouter le décalage
                 st.markdown(
-                    f"<div class='first-color-box' style='background-color: rgb{color_rgb}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>",
+                    f"<div class='first-color-box' style='background-color: rgb{color_rgb}; width: 50px; height: 19px; border-radius: 5px; margin-bottom: 4px;'></div>",
                     unsafe_allow_html=True
                 )
             else:
                 st.markdown(
-                    f"<div style='background-color: rgb{color_rgb}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>",
+                    f"<div style='background-color: rgb{color_rgb}; width: 50px; height: 19px; border-radius: 5px; margin-bottom: 4px;'></div>",
                     unsafe_allow_html=True
                 )
         st.markdown("</div>", unsafe_allow_html=True)
