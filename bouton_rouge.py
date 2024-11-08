@@ -13,12 +13,24 @@ pal = {
 
 st.title("Sélection de Couleurs")
 
-# Appliquer du CSS pour le style des boutons radio
+# CSS pour styliser les boutons radio et centrer les rectangles de couleurs
 css = """
     <style>
         .stRadio label {
             color: black;
             font-weight: normal;
+        }
+        .radio-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .color-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
     </style>
 """
@@ -37,19 +49,24 @@ color_options = list(pal.keys())
 for i in range(num_selections):
     # Colonne pour le bouton radio de sélection de couleur
     with cols[i * 2]:
-        selected_color_name = st.radio("", color_options, key=f"radio_{i}")
-        if selected_color_name:
-            rgb = pal[selected_color_name]
-            st.write(f"Vous avez sélectionné la couleur (ensemble {i + 1}) : {selected_color_name}")
-            st.markdown(
-                f"<div style='background-color: rgb{rgb}; width: 50px; height: 50px; border-radius: 5px;'></div>",
-                unsafe_allow_html=True
-            )
+        with st.container():
+            st.markdown("<div class='radio-container'>", unsafe_allow_html=True)
+            selected_color_name = st.radio("", color_options, key=f"radio_{i}")
+            if selected_color_name:
+                rgb = pal[selected_color_name]
+                st.write(f"Vous avez sélectionné la couleur (ensemble {i + 1}) : {selected_color_name}")
+                st.markdown(
+                    f"<div style='background-color: rgb{rgb}; width: 50px; height: 50px; border-radius: 5px;'></div>",
+                    unsafe_allow_html=True
+                )
+            st.markdown("</div>", unsafe_allow_html=True)
     
     # Colonne à côté pour afficher les rectangles de toutes les couleurs
     with cols[i * 2 + 1]:
+        st.markdown("<div class='color-container'>", unsafe_allow_html=True)
         for color_name, color_rgb in pal.items():
             st.markdown(
                 f"<div style='background-color: rgb{color_rgb}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>",
                 unsafe_allow_html=True
             )
+        st.markdown("</div>", unsafe_allow_html=True)
