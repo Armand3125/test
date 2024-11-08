@@ -13,24 +13,25 @@ pal = {
 
 st.title("Sélection de Couleurs")
 
-# CSS pour masquer les labels et ajuster l'apparence des cases
+# CSS pour aligner les rectangles et les cases à cocher sur la même ligne
 css = """
     <style>
-        /* Cacher les textes des boutons radio */
+        /* Cacher les labels de boutons radio */
         .stRadio div [data-testid="stMarkdownContainer"] p {
             display: none;
         }
-        .radio-container {
+        /* Conteneur pour chaque couleur et case à cocher */
+        .color-radio-container {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            margin-top: 10px;
+            margin-bottom: 8px;
         }
-        .color-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        /* Rectangle de couleur */
+        .color-box {
+            width: 50px;
+            height: 20px;
+            border-radius: 5px;
+            margin-right: 10px;
         }
     </style>
 """
@@ -40,32 +41,36 @@ st.markdown(css, unsafe_allow_html=True)
 num_selections = st.slider("Nombre de sélections de couleur", min_value=2, max_value=7, value=4)
 
 # Créer les colonnes en fonction de la sélection du slider
-cols = st.columns(num_selections * 2)  # On double le nombre pour inclure les couleurs
+cols = st.columns(num_selections)  # Une colonne par sélection
 
 # Options de couleurs disponibles
 color_options = list(pal.keys())
 
 # Afficher les sélecteurs de couleurs et les rectangles correspondants
 for i in range(num_selections):
-    # Colonne pour le bouton radio de sélection de couleur sans texte
-    with cols[i * 2]:
-        with st.container():
-            st.markdown("<div class='radio-container'>", unsafe_allow_html=True)
-            selected_color_name = st.radio("", color_options, key=f"radio_{i}")
-            if selected_color_name:
-                rgb = pal[selected_color_name]
-                st.markdown(
-                    f"<div style='background-color: rgb{rgb}; width: 50px; height: 50px; border-radius: 5px;'></div>",
-                    unsafe_allow_html=True
-                )
-            st.markdown("</div>", unsafe_allow_html=True)
-    
-    # Colonne à côté pour afficher les rectangles de toutes les couleurs
-    with cols[i * 2 + 1]:
-        st.markdown("<div class='color-container'>", unsafe_allow_html=True)
+    with cols[i]:
+        st.markdown("<div class='radio-container'>", unsafe_allow_html=True)
+        
+        # Afficher chaque couleur avec la case à cocher à droite
         for color_name, color_rgb in pal.items():
+            # Utiliser une div pour aligner le rectangle et la case à cocher
             st.markdown(
-                f"<div style='background-color: rgb{color_rgb}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>",
+                f"<div class='color-radio-container'>"
+                f"<div class='color-box' style='background-color: rgb{color_rgb};'></div>"
+                f"</div>",
                 unsafe_allow_html=True
             )
+        
+        # Bouton radio pour sélectionner la couleur
+        selected_color_name = st.radio("", color_options, key=f"radio_{i}")
+        
+        # Affichage de la couleur sélectionnée en grand rectangle
+        if selected_color_name:
+            rgb = pal[selected_color_name]
+            st.write(f"Vous avez sélectionné : {selected_color_name}")
+            st.markdown(
+                f"<div style='background-color: rgb{rgb}; width: 50px; height: 50px; border-radius: 5px;'></div>",
+                unsafe_allow_html=True
+            )
+        
         st.markdown("</div>", unsafe_allow_html=True)
