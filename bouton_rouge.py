@@ -25,8 +25,7 @@ css = """
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin-top: 0px;
-            margin-bottom: 15px;  /* Augmenter l'écart entre les cases à cocher */
+            margin: 0;  /* Supprimer les marges entre les éléments */
         }
         .color-container {
             display: flex;
@@ -39,6 +38,10 @@ css = """
         /* Ajout de la bordure noire autour des rectangles */
         .color-box {
             border: 3px solid black;  /* Bordure noire */
+        }
+        /* Réduire les marges entre les colonnes */
+        .stColumn {
+            padding: 0 !important;  /* Retirer le padding par défaut */
         }
     </style>
 """
