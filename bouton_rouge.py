@@ -25,8 +25,8 @@ css = """
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin-top: 10px;
-            margin-bottom: 20px;  /* Augmenter l'écart entre les cases à cocher */
+            margin-top: 0px;
+            margin-bottom: 15px;  /* Augmenter l'écart entre les cases à cocher */
         }
         .color-container {
             display: flex;
@@ -35,6 +35,10 @@ css = """
         }
         .first-color-box {
             margin-top: 30px;  /* Décalage de 30px pour le premier rectangle */
+        }
+        /* Ajout de la bordure noire autour des rectangles */
+        .color-box {
+            border: 1px solid black;  /* Bordure noire */
         }
     </style>
 """
@@ -59,12 +63,12 @@ for i in range(num_selections):
         for idx, (color_name, color_rgb) in enumerate(pal.items()):
             if idx == 0:  # Pour le premier rectangle, ajouter le décalage
                 st.markdown(
-                    f"<div class='first-color-box' style='background-color: rgb{color_rgb}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>",
+                    f"<div class='first-color-box color-box' style='background-color: rgb{color_rgb}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>",
                     unsafe_allow_html=True
                 )
             else:
                 st.markdown(
-                    f"<div style='background-color: rgb{color_rgb}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>",
+                    f"<div class='color-box' style='background-color: rgb{color_rgb}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>",
                     unsafe_allow_html=True
                 )
         st.markdown("</div>", unsafe_allow_html=True)
