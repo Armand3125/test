@@ -13,10 +13,11 @@ pal = {
 
 st.title("Sélection de Couleurs")
 
-# CSS pour masquer les labels et centrer les éléments
+# CSS pour masquer les labels et ajuster l'apparence des cases
 css = """
     <style>
-        .stRadio label {
+        /* Cacher les textes des boutons radio */
+        .stRadio div [data-testid="stMarkdownContainer"] p {
             display: none;
         }
         .radio-container {
@@ -50,7 +51,7 @@ for i in range(num_selections):
     with cols[i * 2]:
         with st.container():
             st.markdown("<div class='radio-container'>", unsafe_allow_html=True)
-            selected_color_name = st.radio("", color_options, key=f"radio_{i}", label_visibility="collapsed")
+            selected_color_name = st.radio("", color_options, key=f"radio_{i}")
             if selected_color_name:
                 rgb = pal[selected_color_name]
                 st.markdown(
