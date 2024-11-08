@@ -26,6 +26,7 @@ css = """
             align-items: center;
             justify-content: center;
             margin-top: 10px;
+            margin-bottom: 20px;  /* Augmenter l'écart entre les cases à cocher */
         }
         .color-container {
             display: flex;
@@ -33,7 +34,7 @@ css = """
             align-items: center;
         }
         .first-color-box {
-            margin-top: 30px;  /* Décalage de 20px pour le premier rectangle */
+            margin-top: 30px;  /* Décalage de 30px pour le premier rectangle */
         }
     </style>
 """
@@ -54,7 +55,7 @@ for i in range(num_selections):
     with cols[i * 2]:
         st.markdown("<div class='color-container'>", unsafe_allow_html=True)
         
-        # Décalage du premier rectangle de couleur de 20px
+        # Décalage du premier rectangle de couleur de 30px
         for idx, (color_name, color_rgb) in enumerate(pal.items()):
             if idx == 0:  # Pour le premier rectangle, ajouter le décalage
                 st.markdown(
