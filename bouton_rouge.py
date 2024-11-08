@@ -38,7 +38,7 @@ css = """
         }
         /* Ajout de la bordure noire autour des rectangles */
         .color-box {
-            border: 1px solid black;  /* Bordure noire */
+            border: 3px solid black;  /* Bordure noire */
         }
     </style>
 """
