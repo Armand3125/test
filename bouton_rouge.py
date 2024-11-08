@@ -32,6 +32,9 @@ css = """
             flex-direction: column;
             align-items: center;
         }
+        .first-color-box {
+            margin-top: 20px;  /* Décalage de 20px pour le premier rectangle */
+        }
     </style>
 """
 st.markdown(css, unsafe_allow_html=True)
@@ -47,15 +50,22 @@ color_options = list(pal.keys())
 
 # Afficher les sélecteurs de couleurs et les rectangles correspondants
 for i in range(num_selections):
-    # Colonne pour afficher le titre et les rectangles de toutes les couleurs
+    # Colonne pour afficher les rectangles de toutes les couleurs
     with cols[i * 2]:
-        st.markdown(f"<h4>Couleur {i + 1}</h4>", unsafe_allow_html=True)  # Ajouter le sous-titre
         st.markdown("<div class='color-container'>", unsafe_allow_html=True)
-        for color_name, color_rgb in pal.items():
-            st.markdown(
-                f"<div style='background-color: rgb{color_rgb}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>",
-                unsafe_allow_html=True
-            )
+        
+        # Décalage du premier rectangle de couleur de 20px
+        for idx, (color_name, color_rgb) in enumerate(pal.items()):
+            if idx == 0:  # Pour le premier rectangle, ajouter le décalage
+                st.markdown(
+                    f"<div class='first-color-box' style='background-color: rgb{color_rgb}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>",
+                    unsafe_allow_html=True
+                )
+            else:
+                st.markdown(
+                    f"<div style='background-color: rgb{color_rgb}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>",
+                    unsafe_allow_html=True
+                )
         st.markdown("</div>", unsafe_allow_html=True)
 
     # Colonne pour le bouton radio de sélection de couleur sans texte
@@ -70,4 +80,3 @@ for i in range(num_selections):
                     unsafe_allow_html=True
                 )
             st.markdown("</div>", unsafe_allow_html=True)
-
