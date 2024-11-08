@@ -43,6 +43,38 @@ css = """
         .stColumn {
             padding: 0 !important;  /* Retirer le padding par défaut */
         }
+        
+        /* Style spécifique pour les petits écrans (téléphone) */
+        @media (max-width: 768px) {
+            /* Ajuster la taille des cases de couleur et des boutons radio */
+            .color-box {
+                width: 40px;
+                height: 15px;
+                margin-bottom: 2px;
+            }
+            .first-color-box {
+                width: 40px;
+                height: 15px;
+                margin-top: 20px;
+            }
+            .radio-container {
+                flex-direction: row;
+                justify-content: flex-start;
+            }
+            /* Afficher les éléments en une seule colonne sur les petits écrans */
+            .stColumns {
+                flex-direction: column;
+            }
+            /* Ajuster la taille des boutons radio */
+            .stRadio input[type="radio"] {
+                width: 20px;
+                height: 20px;
+            }
+            /* Adapter la taille du texte sur mobile */
+            .stTextInput, .stSlider, .stSelectbox {
+                font-size: 14px;
+            }
+        }
     </style>
 """
 st.markdown(css, unsafe_allow_html=True)
@@ -66,12 +98,12 @@ for i in range(num_selections):
         for idx, (color_name, color_rgb) in enumerate(pal.items()):
             if idx == 0:  # Pour le premier rectangle, ajouter le décalage
                 st.markdown(
-                    f"<div class='first-color-box color-box' style='background-color: rgb{color_rgb}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>",
+                    f"<div class='first-color-box color-box' style='background-color: rgb{color_rgb};'></div>",
                     unsafe_allow_html=True
                 )
             else:
                 st.markdown(
-                    f"<div class='color-box' style='background-color: rgb{color_rgb}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>",
+                    f"<div class='color-box' style='background-color: rgb{color_rgb};'></div>",
                     unsafe_allow_html=True
                 )
         st.markdown("</div>", unsafe_allow_html=True)
