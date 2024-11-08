@@ -1,5 +1,6 @@
 import streamlit as st
 
+# Palette de couleurs
 pal = {
     "NC": (0, 0, 0), "BJ": (255, 255, 255),
     "JO": (228, 189, 104), "BC": (0, 134, 214),
@@ -12,6 +13,7 @@ pal = {
 
 st.title("Sélection de Couleurs")
 
+# Appliquer du CSS pour le style des boutons radio
 css = """
     <style>
         .stRadio label {
@@ -22,21 +24,32 @@ css = """
 """
 st.markdown(css, unsafe_allow_html=True)
 
-# Slider for number of color selections
+# Barre de sélection pour choisir le nombre de colonnes (entre 2 et 7)
 num_selections = st.slider("Nombre de sélections de couleur", min_value=2, max_value=7, value=4)
 
-# Create columns dynamically based on slider value
-cols = st.columns(num_selections)
+# Créer les colonnes en fonction de la sélection du slider
+cols = st.columns(num_selections * 2)  # On double le nombre pour inclure les couleurs
 
-color_options = [name for name in pal.keys()]
+# Options de couleurs disponibles
+color_options = list(pal.keys())
 
+# Afficher les sélecteurs de couleurs et les rectangles correspondants
 for i in range(num_selections):
-    with cols[i]:
+    # Colonne pour le bouton radio de sélection de couleur
+    with cols[i * 2]:
         selected_color_name = st.radio("", color_options, key=f"radio_{i}")
         if selected_color_name:
             rgb = pal[selected_color_name]
+            st.write(f"Vous avez sélectionné la couleur (ensemble {i + 1}) : {selected_color_name}")
             st.markdown(
                 f"<div style='background-color: rgb{rgb}; width: 50px; height: 50px; border-radius: 5px;'></div>",
                 unsafe_allow_html=True
             )
-            st.write(f"Vous avez sélectionné la couleur (ensemble {i + 1}) : {selected_color_name}")
+    
+    # Colonne à côté pour afficher les rectangles de toutes les couleurs
+    with cols[i * 2 + 1]:
+        for color_name, color_rgb in pal.items():
+            st.markdown(
+                f"<div style='background-color: rgb{color_rgb}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>",
+                unsafe_allow_html=True
+            )
