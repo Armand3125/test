@@ -25,7 +25,7 @@ css = """
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin-top: 1px;
+            margin-top: 100px;
         }
         .color-container {
             display: flex;
