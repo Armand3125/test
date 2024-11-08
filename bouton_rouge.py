@@ -47,8 +47,19 @@ color_options = list(pal.keys())
 
 # Afficher les sélecteurs de couleurs et les rectangles correspondants
 for i in range(num_selections):
+    # Colonne pour afficher le titre et les rectangles de toutes les couleurs
+    with cols[i * 2]:
+        st.markdown(f"<h4>Couleur {i + 1}</h4>", unsafe_allow_html=True)  # Ajouter le sous-titre
+        st.markdown("<div class='color-container'>", unsafe_allow_html=True)
+        for color_name, color_rgb in pal.items():
+            st.markdown(
+                f"<div style='background-color: rgb{color_rgb}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>",
+                unsafe_allow_html=True
+            )
+        st.markdown("</div>", unsafe_allow_html=True)
+
     # Colonne pour le bouton radio de sélection de couleur sans texte
-    with cols[i * 2+1]:
+    with cols[i * 2 + 1]:
         with st.container():
             st.markdown("<div class='radio-container'>", unsafe_allow_html=True)
             selected_color_name = st.radio("", color_options, key=f"radio_{i}")
@@ -59,13 +70,4 @@ for i in range(num_selections):
                     unsafe_allow_html=True
                 )
             st.markdown("</div>", unsafe_allow_html=True)
-    
-    # Colonne à côté pour afficher les rectangles de toutes les couleurs
-    with cols[i * 2]:
-        st.markdown("<div class='color-container'>", unsafe_allow_html=True)
-        for color_name, color_rgb in pal.items():
-            st.markdown(
-                f"<div style='background-color: rgb{color_rgb}; width: 50px; height: 20px; border-radius: 5px; margin-bottom: 4px;'></div>",
-                unsafe_allow_html=True
-            )
-        st.markdown("</div>", unsafe_allow_html=True)
+
