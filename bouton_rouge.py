@@ -48,7 +48,7 @@ color_options = list(pal.keys())
 # Afficher les sélecteurs de couleurs et les rectangles correspondants
 for i in range(num_selections):
     # Colonne pour le bouton radio de sélection de couleur sans texte
-    with cols[i * 2]:
+    with cols[i * 2+1]:
         with st.container():
             st.markdown("<div class='radio-container'>", unsafe_allow_html=True)
             selected_color_name = st.radio("", color_options, key=f"radio_{i}")
@@ -61,7 +61,7 @@ for i in range(num_selections):
             st.markdown("</div>", unsafe_allow_html=True)
     
     # Colonne à côté pour afficher les rectangles de toutes les couleurs
-    with cols[i * 2 + 1]:
+    with cols[i * 2]:
         st.markdown("<div class='color-container'>", unsafe_allow_html=True)
         for color_name, color_rgb in pal.items():
             st.markdown(
