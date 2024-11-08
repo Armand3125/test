@@ -25,8 +25,8 @@ css = """
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin-top: 10px;
-            margin-bottom: 20px;  /* Augmenter l'écart entre les cases à cocher */
+            margin-top: 0px;
+            margin-bottom: 15px;  /* Augmenter l'écart entre les cases à cocher */
         }
         .color-container {
             display: flex;
