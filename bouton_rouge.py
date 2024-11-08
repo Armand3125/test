@@ -33,7 +33,7 @@ css = """
             align-items: center;
         }
         .first-color-box {
-            margin-top: 20px;  /* Décalage de 20px pour le premier rectangle */
+            margin-top: 30px;  /* Décalage de 20px pour le premier rectangle */
         }
     </style>
 """
