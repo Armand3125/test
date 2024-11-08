@@ -13,12 +13,11 @@ pal = {
 
 st.title("Sélection de Couleurs")
 
-# CSS pour styliser les boutons radio et centrer les rectangles de couleurs
+# CSS pour masquer les labels et centrer les éléments
 css = """
     <style>
         .stRadio label {
-            color: black;
-            font-weight: normal;
+            display: none;
         }
         .radio-container {
             display: flex;
@@ -47,14 +46,13 @@ color_options = list(pal.keys())
 
 # Afficher les sélecteurs de couleurs et les rectangles correspondants
 for i in range(num_selections):
-    # Colonne pour le bouton radio de sélection de couleur
+    # Colonne pour le bouton radio de sélection de couleur sans texte
     with cols[i * 2]:
         with st.container():
             st.markdown("<div class='radio-container'>", unsafe_allow_html=True)
-            selected_color_name = st.radio("", color_options, key=f"radio_{i}")
+            selected_color_name = st.radio("", color_options, key=f"radio_{i}", label_visibility="collapsed")
             if selected_color_name:
                 rgb = pal[selected_color_name]
-                st.write(f"Vous avez sélectionné la couleur (ensemble {i + 1}) : {selected_color_name}")
                 st.markdown(
                     f"<div style='background-color: rgb{rgb}; width: 50px; height: 50px; border-radius: 5px;'></div>",
                     unsafe_allow_html=True
